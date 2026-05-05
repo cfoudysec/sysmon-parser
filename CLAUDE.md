@@ -26,16 +26,23 @@ The parser handles two input shapes via root-tag dispatch in `main()`:
 
 When extending field extraction, modify `EVENT_DATA_FIELDS` and the `ordered` list in `parse_event` — they govern which `<Data Name="...">` elements are pulled from `<EventData>` and the resulting JSON key order.
 
-### Output format — JSON to stdout
+### Output format — `--format` flag, three modes
 
-Two shape rules layered together:
+Single output flag with three values, all multi-record:
 
-1. **No filter flags passed:** 1 event → JSON object, ≥2 events → JSON array. Preserves the original spec (single events shouldn't need array unwrapping for the trivial case).
-2. **Any filter flag passed:** always a JSON array, even if exactly one event matches and even if the result is empty (`[]`). Stable shape for `jq` pipelines is more useful than consistency with the no-filter case.
+| `--format` | Shape |
+|------------|-------|
+| `json` (default) | JSON array, indented; empty result is `[]` |
+| `jsonl` | One JSON object per line (newline-delimited), no outer wrapping; empty result is no output |
+| `csv` | Header row followed by one data row per event; empty result is just the header |
 
-Errors and `argparse` usage go to stderr; stdout is always valid JSON.
+All three are inherently array-shaped — there is **no** "single event → object" special case. (Earlier versions returned an object for unfiltered single-event input; that behavior was dropped when `--format` landed because the inconsistency made piping awkward.) When extending output, keep this invariant: every format must be safe to consume by a streaming/multi-record reader.
 
-`DecodedCommandLine` is **omitted** (not `null`) when no `-enc` flag is detected, so unencoded events keep their original 10-field shape. Decoding is **fail-soft**: malformed base64 or non-UTF-16-LE bytes produce no `DecodedCommandLine`, never an exception. Real Sysmon feeds are noisy and one bad event must not abort the run.
+Errors and `argparse` usage go to stderr; stdout is always valid output for the chosen format.
+
+**CSV column set is fixed** at the 10 standard fields plus `DecodedCommandLine`, in the order defined by `CSV_FIELDS` in `parser.py`. The `DecodedCommandLine` column is always present and empty when the event had no encoded payload — CSV needs a stable schema.
+
+**JSON / JSONL behavior for `DecodedCommandLine`:** the key is **omitted** (not `null`) when no `-enc` flag is detected, so unencoded events keep their original 10-field shape. Decoding is **fail-soft**: malformed base64 or non-UTF-16-LE bytes produce no `DecodedCommandLine`, never an exception. Real Sysmon feeds are noisy and one bad event must not abort the run.
 
 ### Filter flags and how they combine
 
@@ -56,6 +63,12 @@ Errors and `argparse` usage go to stderr; stdout is always valid JSON.
 - Add the check to `matches()` and update the `filtering` predicate in `main()` so an empty value doesn't accidentally count as "filter active."
 - Don't introduce greedy `nargs='+'` flags — they swallow the positional path argument. Use `action='append'` instead.
 - Document the `--flag=-value` form in help text for any flag that might receive values starting with `-` (argparse footgun).
+
+### `--stats` mode
+
+> This stats feature is for quick triage to understand what's in a file before deep analysis.
+
+`--stats` short-circuits event output and prints a plain-text summary: total event count, sorted list of unique `Image` values, sorted list of unique `User` values, and a `Counter`-driven `IntegrityLevel` breakdown ordered by frequency. Filters apply *before* stats, so `--stats --integrity High` summarizes only the High-integrity subset. `--format` is ignored under `--stats` (plain text is the only output mode for this feature; if structured stats become needed, add `--stats-format json` rather than overloading `--format`).
 
 ### Out of scope (deliberate)
 

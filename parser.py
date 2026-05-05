@@ -1,9 +1,11 @@
 #!/usr/bin/env python3
 import argparse
 import base64
+import csv
 import json
 import sys
 import xml.etree.ElementTree as ET
+from collections import Counter
 
 NS = {"e": "http://schemas.microsoft.com/win/2004/08/events/event"}
 
@@ -21,6 +23,12 @@ EVENT_DATA_FIELDS = [
 INTEGRITY_LEVELS = ["High", "Medium", "Low", "System"]
 
 ENC_FLAGS = {"-enc", "-encodedcommand", "-ec"}
+
+OUTPUT_FORMATS = ["json", "jsonl", "csv"]
+
+CSV_FIELDS = ["EventID", "UtcTime", "Image", "CommandLine", "DecodedCommandLine",
+              "User", "IntegrityLevel", "ParentImage", "ParentCommandLine",
+              "Computer", "Hashes"]
 
 
 def decode_powershell_enc(commandline):
@@ -69,6 +77,28 @@ def parse_event(event):
     return out
 
 
+def emit_stats(events):
+    print(f"Total events: {len(events)}")
+    print()
+
+    images = sorted({e["Image"] for e in events})
+    print(f"Unique Images: {len(images)}")
+    for img in images:
+        print(f"  {img}")
+    print()
+
+    users = sorted({e["User"] for e in events})
+    print(f"Unique Users: {len(users)}")
+    for u in users:
+        print(f"  {u}")
+    print()
+
+    by_int = Counter(e["IntegrityLevel"] for e in events)
+    print("Events by IntegrityLevel:")
+    for level, count in by_int.most_common():
+        print(f"  {level}: {count}")
+
+
 def matches(event, image, user, integrity, cmdline):
     if image is not None and image.lower() not in event["Image"].lower():
         return False
@@ -95,6 +125,14 @@ def main(argv):
                    help="Keep events whose CommandLine contains this substring "
                         "(case-insensitive). Repeat to OR multiple substrings. "
                         "For values starting with '-', use --cmdline=-enc.")
+    p.add_argument("--format", choices=OUTPUT_FORMATS, default="json",
+                   help="Output format. json (default) emits a JSON array; "
+                        "jsonl emits one JSON object per line; csv emits a "
+                        "header row followed by one row per event.")
+    p.add_argument("--stats", action="store_true",
+                   help="Emit summary statistics (total, unique Images, unique "
+                        "Users, IntegrityLevel breakdown) instead of events. "
+                        "Filters apply first; --format is ignored.")
     args = p.parse_args(argv[1:])
 
     tree = ET.parse(args.path)
@@ -107,15 +145,25 @@ def main(argv):
 
     parsed = [parse_event(e) for e in events]
 
-    filtering = any(v for v in (args.image, args.user, args.integrity, args.cmdline))
-    if filtering:
+    if any(v for v in (args.image, args.user, args.integrity, args.cmdline)):
         parsed = [e for e in parsed
                   if matches(e, args.image, args.user, args.integrity, args.cmdline)]
-        output = parsed
-    else:
-        output = parsed[0] if len(parsed) == 1 else parsed
 
-    print(json.dumps(output, indent=2))
+    if args.stats:
+        emit_stats(parsed)
+        return 0
+
+    if args.format == "json":
+        print(json.dumps(parsed, indent=2))
+    elif args.format == "jsonl":
+        for e in parsed:
+            print(json.dumps(e))
+    elif args.format == "csv":
+        w = csv.writer(sys.stdout)
+        w.writerow(CSV_FIELDS)
+        for e in parsed:
+            w.writerow([e.get(f, "") for f in CSV_FIELDS])
+
     return 0
 
 
